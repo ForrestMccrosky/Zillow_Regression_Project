@@ -21,30 +21,30 @@ from env import host, user, password, sql_connect
 
 def wrangle_zillow():
     '''
-    This function is going to acquire the neccessary columns bedroomcnt, bathroomcnt, 
-    calculatedfinishedsquarefeet, taxvaluedollorcnt, yearbuilt, taxamount, and fips from
+    This function is going to acquire the neccessary columns bedroomcnt,
+    bathroomcnt, 
+    calculatedfinishedsquarefeet, taxvaluedollorcnt, yearbuilt, taxamount, and fips
+    from
     the zillow databse in SQL and move it into a pandas dataframe while
     filtering for Single Family Residential properties
     
-    The function will then clean the null values by dropping them because the percentage
-    of rows with null values was very small compared to the 2.15 million rows of the dataframe
+    The function will then clean the null values by dropping them because the 
+    percentage
+    of rows with null values was very small compared to the 2.15 million rows of the
+    dataframe
     '''
     ## sql query to select the neccessary columns needed for project
     
-    ## while using where to filter for homes with the Id = 261 because those
-    ## are single family homes
-    sql_query = '''
-    select parcelid, bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet,
-    taxvaluedollarcnt, yearbuilt, taxamount, fips
-    from properties_2017
-    where propertylandusetypeid in (260, 261, 262, 263, 264, 265, 266, 273, 275, 276,       279); 
-    '''
+    ## while using where to filter for homes with the Ids below because those
+    ## are considered single family unit homes
+    sql_query = '''select * from properties_2017
+    join predictions_2017 using(parcelid)
+    where transactiondate between "2017-05-01" and "2017-08-31"
+    and propertylandusetypeid in (260, 261, 262, 263, 264, 265, 266, 273, 275, 276,
+    279)'''
     
-    ## Connect to the Zilllw database
-    df = pd.read_sql(sql_query, sql_connect('zillow'))
-    
-    ## We are going to drop the null rows because of the 
-    df = df.dropna()
+    ## Connect to the Zilllow database
+    df = pd.read_sql(sql_query, sql_connect('zillow'))    
     
     return df
 
