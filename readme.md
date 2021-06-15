@@ -105,32 +105,20 @@ The goal of the modeling and evalutaion component of the pipeline is to use the 
 
 ## Data Dictionary
 
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| Column Name                  | Renamed Column | Info / Value                                                             |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| parcelid                     | dropped: N/A   | unique ID for the property                                               |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| bathroomcnt                  | baths          | property bathroom count                                                  |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| bedroomcnt                   | beds           | property bedroom count                                                   |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| calculatedfinishedsquarefeet | square_feet    | total square feet of the property                                        |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| fips                         | dropped: N/A   | FIPS code otherwise known as County Code                                 |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| propertylandusetypeid        | dropped: N/A   | Type of Property: Used in SQL query to filter for Single Unit Properties |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| yearbuilt                    | dropped: N/A   | Year property was built                                                  |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| taxvaluedollarcnt            | tax_value      | Properties tax value in dollars                                          |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| transactiondate              | dropped: N/A   | Day property was purchased: Used in SQL query to filter to the correct   |
-|                              |                | timeframe within scope of the project                                    |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| taxamount                    | tax_amount     | amount of tax on the properties value                                    |
-+------------------------------+----------------+--------------------------------------------------------------------------+
-| tax_rate                     | tax_rate       | the tax rate on the property                                             |
-+------------------------------+----------------+--------------------------------------------------------------------------+
+| Column Name                  | Renamed Column | Info / Value                                                                                                 |
+|------------------------------|----------------|--------------------------------------------------------------------------------------------------------------|
+| parcelid                     | dropped: N/A   | unique ID for the property                                                                                   |
+| bathroomcnt                  | baths          | property bathroom count                                                                                      |
+| bedroomcnt                   | beds           | property bedroom count                                                                                       |
+| calculatedfinishedsquarefeet | square_feet    | total square feet of the property                                                                            |
+| fips                         | dropped: N/A   | county code for property                                                                                     |
+| propertylandusetypeid        | dropped: N/A   | Id for type of property: Used in SQL query to filter for single unit properties                              |
+| yearbuilt                    | dropped: N/A   | year property was built                                                                                      |
+| taxvaluedollarcnt            | tax_value      | properties tax value in dollars                                                                              |
+| transactiondate              | dropped: N/A   | day property was purchased: Used in SQL query to filter to correct timeframe within the scope of the project |
+| taxamount                    | tax_amount     | amount of tax on properties value                                                                            |
+| tax_rate                     | tax_rate       | the tax rate on the property                                                                                 |
+
 
 ## Project Recreation
  - Use the functions in the .py files and follow the pipeline flow of the notebook
