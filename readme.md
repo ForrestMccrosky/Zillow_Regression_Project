@@ -56,6 +56,7 @@ Many columns were outputted into the dataframe with the SQL I had written. In or
 The zillow database had some null values and outliers. In order to prepare for explore these were addressed by being removed from the dataframe. 
  - Outliers were addressed using standard deviation, anything outside the absolute value of 3 was dropped
  - Null values were also dropped because there were only 143 null values after column filtering. Which is a small percentage compared to the 38 thousand rowed dataframe
+ - A min max scalar was also applied to our X datasets after the target variable was seperated into Y's
 
 ## Explore
 
@@ -76,4 +77,68 @@ I was then able to use these categories to perform T & P test's to determine if 
  - Scatter Pairplot with Regression Lines
  - Pairplot of variable relationships
 
+## Modeling & Evaluation
 
+The goal of the modeling and evalutaion component of the pipeline is to use the best features determined from explore to predict our target variable tax_value
+
+### Features Used in Modeling
+ - beds
+ - baths
+ - square_feet
+
+### Model Performance
+ - Using the mean for baseline and not the median
+
+ +----------------------------------+------------------+---------------------+-----------+
+| Model                            | RMSE Train Score | RMSE Validate Score | R-squared |
++----------------------------------+------------------+---------------------+-----------+
+| Baseline                         | 307,602.83       | 303,586.91          | -1.39e-06 |
++----------------------------------+------------------+---------------------+-----------+
+| LinearRegression                 | 253,120.97       | 251,470.47          | 0.3139    |
++----------------------------------+------------------+---------------------+-----------+
+| LassoLars                        | 253,121.23       | 251,467.04          | 0.3139    |
++----------------------------------+------------------+---------------------+-----------+
+| TweedieRegressor                 | 253,120.96       | 251,470.47          | 0.3138    |
++----------------------------------+------------------+---------------------+-----------+
+| PolynomialRegression (3 degrees) | 251,810.15       | 251,108.27          | 0.3158    |
++----------------------------------+------------------+---------------------+-----------+
+
+### Test on Polynomial Regression
+ - RMSE of test: 250,169.84
+ - R-squared of test: 0.3557
+
+### This is better than our baseline
+
+## Data Dictionary
+
++------------------------------+----------------+--------------------------------------------------------------------------+
+| Column Name                  | Renamed Column | Info / Value                                                             |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| parcelid                     | dropped: N/A   | unique ID for the property                                               |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| bathroomcnt                  | baths          | property bathroom count                                                  |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| bedroomcnt                   | beds           | property bedroom count                                                   |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| calculatedfinishedsquarefeet | square_feet    | total square feet of the property                                        |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| fips                         | dropped: N/A   | FIPS code otherwise known as County Code                                 |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| propertylandusetypeid        | dropped: N/A   | Type of Property: Used in SQL query to filter for Single Unit Properties |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| yearbuilt                    | dropped: N/A   | Year property was built                                                  |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| taxvaluedollarcnt            | tax_value      | Properties tax value in dollars                                          |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| transactiondate              | dropped: N/A   | Day property was purchased: Used in SQL query to filter to the correct   |
+|                              |                | timeframe within scope of the project                                    |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| taxamount                    | tax_amount     | amount of tax on the properties value                                    |
++------------------------------+----------------+--------------------------------------------------------------------------+
+| tax_rate                     | tax_rate       | the tax rate on the property                                             |
++------------------------------+----------------+--------------------------------------------------------------------------+
+
+## Project Recreation
+ - Use the functions in the .py files and follow the pipeline flow of the notebook
+ - Will need your own env.py file with credentials to use the sql_connect function to be able to access the database
+ - Watch the presentation to visualize and hear the complete thought process
